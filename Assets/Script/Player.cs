@@ -1,16 +1,19 @@
+using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public float speed = 10f;
+    void FixedUpdate()
     {
-        
+        _Move();
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    void _Move()
     {
-        
+        float h = Input.GetAxisRaw("Horizontal");
+        float v = Input.GetAxisRaw("Vertical");
+        Vector3 movement = new Vector3(h, v, 0).normalized * speed * Time.deltaTime;
+        transform.Translate(movement);
     }
 }
