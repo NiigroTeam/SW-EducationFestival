@@ -6,7 +6,7 @@ public class Enemey : MonoBehaviour
     {
         if (other.tag == "Weapon")
         {
-            Debug.Log(other.name);
+            Destroy(gameObject);
         }
     }
 }

@@ -11,6 +11,8 @@ public class Red_bird_Attack : Skill_based
     public float spreadAngle = 240f;
     public float speed = 5f;
     public float bulletScale = 1f;
+    public AudioClip audioClip;
+    public AudioSource audioSource;
 
     [Header("Spawn Settings")]
     public float spawnY = 0f;
@@ -99,6 +101,8 @@ public class Red_bird_Attack : Skill_based
             startAngle = CENTER_ANGLE - (waveSpread / 2f) + (attackCount - 1) * 8;
             angleStep = angleStepValue;
 
+            audioSource.PlayOneShot(audioClip);
+            
             for (int i = 0; i < bulletCount; i++)
             {
                 float angle = startAngle + angleStep * i;
@@ -110,7 +114,7 @@ public class Red_bird_Attack : Skill_based
 
                 float bulletAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
                 Quaternion rot = Quaternion.Euler(0, 0, bulletAngle);
-
+                
                 GameObject bullet = bossManager.UseSkill(0, bulletCenterSpawnPos, rot); // 💡 [수정]: bulletCenterSpawnPos 사용
                 if (bullet == null) continue;
 

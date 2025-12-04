@@ -7,6 +7,8 @@ public class Red_bird_Attack_2 : Skill_based
 {
     [Header("Boss Reference")]
     public BossManager bossManager;
+    public AudioSource audioSource;
+    public AudioClip audioClip;
 
     [Header("Bullet Settings (Random Targeting)")]
     public float speed = 10f; // 총알 속도
@@ -118,6 +120,7 @@ public class Red_bird_Attack_2 : Skill_based
             // 2. 공격 시작 시점의 플레이어 위치를 기준점으로 저장
             Vector3 playerPos = PlayerManager.instance.transform.position;
             
+            audioSource.PlayOneShot(audioClip);
             // 💡 [수정]: pelletsPerShot 개수만큼 총알을 동시에 발사하는 루프
             for (int j = 0; j < pelletsPerShot; j++)
             {

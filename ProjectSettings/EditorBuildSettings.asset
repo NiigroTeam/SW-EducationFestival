@@ -6,6 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/kimsechan/Scenes/Menu.unity
+    guid: 56d745473f4694dbf9301153c6334377
+  - enabled: 1
+    path: Assets/kimsechan/Scenes/Job_Select.unity
+    guid: 6a2c435047c1d49a081f0b58b0f666c5
+  - enabled: 1
+    path: Assets/kimsechan/Scenes/Chap_1.unity
+    guid: d759c117ddaf142e18d9a6422dc2b19f
+  - enabled: 1
     path: Assets/kimsechan/Scenes/Chap_2.unity
     guid: 3d1efcf97efc44e3fa1d1ffaa05cce90
   - enabled: 1
@@ -15,11 +24,23 @@ EditorBuildSettings:
     path: Assets/kimsechan/Scenes/Chap_4.unity
     guid: 171eb83d5c5fb480483cab160c3e746d
   - enabled: 1
-    path: Assets/kimsechan/Scenes/Job_Select.unity
-    guid: 6a2c435047c1d49a081f0b58b0f666c5
+    path: Assets/kimsechan/Scenes/Die.unity
+    guid: 4a631ac9db64f46c58025400ca7d0f18
   - enabled: 1
-    path: Assets/kimsechan/Scenes/next.unity
-    guid: 18afdfdb83fbc487ca87816f4a844fb7
+    path: Assets/Kimjaewon/Scenes/ending/Bow(Clone).unity
+    guid: 5cbcec8f9284e4295a97f46c928d7717
+  - enabled: 1
+    path: Assets/Kimjaewon/Scenes/ending/Dagger(Clone).unity
+    guid: bfca8b40e55f443b6a802504a2f34b1b
+  - enabled: 1
+    path: Assets/Kimjaewon/Scenes/ending/Spear(Clone).unity
+    guid: c2e7d7574e46f48dfb2ef055c3955818
+  - enabled: 1
+    path: Assets/Kimjaewon/Scenes/ending/Sword(Clone).unity
+    guid: ed47ccecd2f294f12a5524b8f213077a
+  - enabled: 1
+    path: Assets/Kimjaewon/Scenes/ending/Victory_dagger.unity
+    guid: d5c60b603152a441591bc15e40d392e8
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

@@ -11,6 +11,8 @@ public class PlayerOnClick : MonoBehaviour
 
     private StartManager pSM;
     private int selectedJobIndex = 0; // 직업 인덱스를 더 명확하게 변경
+    public AudioSource audioSource;
+    public AudioClip audioClip;
     
     [Obsolete("Obsolete")]
     private void Start()
@@ -29,16 +31,20 @@ public class PlayerOnClick : MonoBehaviour
 
     // 직업 선택 함수들 (각 버튼에 연결)
     public void OnClick_1() { 
-        SetJobIndex(0); 
+        SetJobIndex(0);
+        Audio();
     }
     public void OnClick_2() { 
         SetJobIndex(1); 
+        Audio();
     }
     public void OnClick_3() { 
         SetJobIndex(2); 
+        Audio();
     }
     public void OnClick_4() { 
         SetJobIndex(3); 
+        Audio();
     }
 
     /// <summary>
@@ -83,5 +89,10 @@ public class PlayerOnClick : MonoBehaviour
         
         // StartManager에게 플레이어 생성 및 씬 전환을 지시
         pSM.StartJobCoroutine();
+    }
+
+    public void Audio()
+    {
+        audioSource.PlayOneShot(audioClip);
     }
 }

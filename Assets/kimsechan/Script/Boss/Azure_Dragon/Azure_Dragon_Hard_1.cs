@@ -9,6 +9,9 @@ public class Azure_Dragon_Hard_1 : Skill_based
     private const float MAP_RIGHT_X = 33.0f; // 맵의 오른쪽 경계 X 좌표
     private const float HORIZONTAL_ATTACK_Y = 0.0f; // 좌우 공격 시 드래곤의 기본 Y 위치
     
+    public AudioSource audioSource;
+    public AudioClip audioClip;
+    
     // 상/하 공격 경로
     private const float VERTICAL_SPAWN_Y_UP = 16.3f; // 위쪽 스폰 Y
     private const float VERTICAL_TARGET_Y_DOWN = -16.3f; // 아래쪽 목표 Y
@@ -184,6 +187,7 @@ public class Azure_Dragon_Hard_1 : Skill_based
 
         // 3. 드래곤 소환 및 돌진
         // ✨ dragonRotation 적용
+        audioSource.PlayOneShot(audioClip);
         GameObject dragon = bossManager.UseSkill(dragonSkillIndex, dragonSpawnPos, dragonRotation); 
         
         if (dragon != null)

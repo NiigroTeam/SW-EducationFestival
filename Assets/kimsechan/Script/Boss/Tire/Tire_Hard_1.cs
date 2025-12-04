@@ -12,6 +12,9 @@ public class Tire_Hard_1 : Skill_based
     private const float EXIT_STOP_X_LEFT = -46.0f;
     private const float EXIT_STOP_X_RIGHT = 46.0f;
     
+    public AudioClip audioClip;
+    public AudioSource audioSource;
+    
     // === 설정 변수 ===
     [Header("Dependencies")]
     public BossManager bossManager;
@@ -50,7 +53,7 @@ public class Tire_Hard_1 : Skill_based
     public int warningIndex = 5;
     
     [Tooltip("경고 표시 유지 시간")]
-    public float warningDuration = 0.5f; // 경고 시간을 0.5초로 단축했습니다.
+    public float warningDuration = 0.2f; // 경고 시간을 0.5초로 단축했습니다.
     
     private Transform playerTarget;
     private Coroutine currentCoroutine;
@@ -168,6 +171,7 @@ public class Tire_Hard_1 : Skill_based
             currentScale.y *= attackObjectScale;
             tire.transform.localScale = new Vector3(targetScaleX * Mathf.Abs(currentScale.x), currentScale.y, currentScale.z);
 
+            audioSource.PlayOneShot(audioClip);
             // 돌진 거리 조정 (isFinalDash가 false이므로 항상 전체 거리를 돌진합니다.)
             Vector3 adjustedTargetPos = finalAttackTargetPos;
             if (isFinalDash) 

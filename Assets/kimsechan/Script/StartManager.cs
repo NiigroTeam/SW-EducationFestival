@@ -21,7 +21,7 @@ public class StartManager : MonoBehaviour
     public void StartJobCoroutine()
     {
         StartCoroutine(_Job());
-        SceneManager.LoadScene(0); // 0번 씬으로 이동
+        SceneManager.LoadScene("Chap_1"); // 0번 씬으로 이동
     }
 
     IEnumerator _Job()

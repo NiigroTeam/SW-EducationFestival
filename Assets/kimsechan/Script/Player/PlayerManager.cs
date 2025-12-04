@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
@@ -21,6 +22,7 @@ public class PlayerManager : MonoBehaviour
 
     private bool isFirstLoad = true;
     private bool sceneEventsRegistered = false;
+    public string sceneName = "Die";
 
     public float Hp
     {
@@ -126,10 +128,6 @@ public class PlayerManager : MonoBehaviour
     private void Die()
     {
         Debug.Log("플레이어 사망!");
-        Player player = GetComponentInParent<Player>();
-        if (player != null)
-            player.enabled = false;
-        else
-            Debug.LogWarning("사망 처리: 'Player' 스크립트를 찾을 수 없습니다.");
+        SceneManager.LoadScene(sceneName);
     }
 }

@@ -6,6 +6,9 @@ public class Red_bird_Normal_2 : Skill_based
 {
     [Header("Boss Reference")]
     public BossManager bossManager;
+    
+    public AudioSource audio;
+    public AudioClip audioClip;
 
     [Header("Bullet Settings")]
     public int bulletCount = 5;       // 한 번에 쏠 총알 수 (5개 유지)
@@ -106,7 +109,7 @@ public class Red_bird_Normal_2 : Skill_based
             }
             
             // ----------------------------------------------------------------------------------
-            
+            audio.PlayOneShot(audioClip);
             // ✅ 한 번의 발사 (탄막 bulletCount개) 루프
             for (int i = 0; i < bulletCount; i++)
             {
@@ -122,7 +125,7 @@ public class Red_bird_Normal_2 : Skill_based
                 
                 // ✅ 수정: 최종 회전에 90도를 추가합니다.
                 Quaternion rot = Quaternion.Euler(0, 0, bulletAngle - 90f + 90f);
-
+                
                 GameObject bullet = bossManager.UseSkill(0, spawnPos, rot);
                 if (bullet == null) continue;
 

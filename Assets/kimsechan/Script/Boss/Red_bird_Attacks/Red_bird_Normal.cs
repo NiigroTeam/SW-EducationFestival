@@ -14,6 +14,9 @@ public class Red_bird_Normal : Skill_based
     private const int FIRE_COUNT = 5;
     private const float TOTAL_TIME = 2f;
     private const float ATTACK_DELAY = TOTAL_TIME / FIRE_COUNT; // 0.4초 간격
+    
+    public AudioSource audioSource;
+    public AudioClip audioClip;
 
     [Header("Spawn Settings")]
     public float spawnY = 0f;
@@ -103,6 +106,7 @@ public class Red_bird_Normal : Skill_based
             Quaternion rot = Quaternion.Euler(0, 0, angle); 
 
             // 4. UseSkill 메서드를 통해 총알 생성 (인덱스 1 사용)
+            audioSource.PlayOneShot(audioClip);
             GameObject bullet = bossManager.UseSkill(1, startPos, rot);
             if (bullet == null)
             {

@@ -16,6 +16,9 @@ public class Tire_Normal_2 : Skill_based
     private Transform playerTarget;
     private Coroutine currentAttackCoroutine; // 현재 공격 코루틴
     private GameObject[] spawnedObjects;      // 한 번만 모아서 저장
+    
+    public AudioSource audioSource;
+    public AudioClip audioClip;
 
     void Update()
     {
@@ -60,7 +63,7 @@ public class Tire_Normal_2 : Skill_based
 
         for (int i = 0; i < spawnCount; i++)
         {
-            int skillIndex = Random.Range(0, bossManager.bossSkills.Count);
+            int skillIndex = Random.Range(0, 3);
             float angle = startAngle + angleStep * i;
             Vector3 offset = new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad), 0) * spawnRadius;
             Vector3 spawnPos = bossManager.transform.position + offset;
@@ -92,6 +95,7 @@ public class Tire_Normal_2 : Skill_based
             yield return null;
         }
 
+        audioSource.PlayOneShot(audioClip);
         // 3. 플레이어 방향으로 투사
         for (int i = 0; i < spawnCount; i++)
         {

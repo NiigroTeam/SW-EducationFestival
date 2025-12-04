@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -6,20 +7,20 @@ using UnityEngine.SceneManagement;
 public class SceneFader : MonoBehaviour
 {
     // 🔴 인스펙터에 검은색 Image UI를 할당하세요.
-    public Image blackScreen; 
+    public Image blackScreen;
     public float fadeDuration = 5.0f;
+    public TMP_Text fadeText;
     
     [Header("새 씬 플레이어 목표 위치")]
     public Vector3 playerPos; // 인스펙터에서 설정할 목표 위치
 
     public static SceneFader Instance { get; private set; }
 
-    private void Awake()
+    public void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); 
         }
         else
         {
@@ -141,5 +142,6 @@ public class SceneFader : MonoBehaviour
         Color finalColor = targetColor;
         finalColor.a = 0f;
         blackScreen.color = finalColor;
+        Destroy(fadeText);
     }
 }

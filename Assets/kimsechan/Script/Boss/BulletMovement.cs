@@ -23,12 +23,8 @@ public class BulletMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Player playerComponent = collision.gameObject.GetComponent<Player>();
+            PlayerManager.instance.take_Damage(damage);
             
-            if (playerComponent != null)
-            { 
-                PlayerManager.instance.take_Damage(damage);
-            }
             gameObject.SetActive(false); 
         }
     }

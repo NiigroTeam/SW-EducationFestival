@@ -8,6 +8,9 @@ public class Azure_Dragon_Normal : Skill_based
     [Header("Boss Reference")]
     public BossManager bossManager; 
     
+    public AudioSource audioSource;
+    public AudioClip audioClip;
+    
     [Header("Lightning Settings")]
     [Tooltip("BossManager.bossSkills 리스트에서 번개 스킬의 인덱스 (0으로 가정)")]
     public int lightningSkillIndex = 0; 
@@ -244,6 +247,7 @@ public class Azure_Dragon_Normal : Skill_based
             float currentRadius = initialRadius + (i * radiusIncrementPerStage);
             
             // 6방향에 동시에 번개 스폰 (각 링별 타격)
+            audioSource.PlayOneShot(audioClip);
             foreach (Vector2 dir in directions)
             {
                 Vector3 spawnPosition = centerPosition + (Vector3)(dir * currentRadius);
@@ -251,7 +255,7 @@ public class Azure_Dragon_Normal : Skill_based
                 // 번개는 Y 오프셋을 적용하여 상공에서 떨어지는 것처럼 보이게 스폰
                 Vector3 lightningSpawnPosition = spawnPosition;
                 lightningSpawnPosition.y += lightningYOffset; 
-
+                
                 GameObject lightning = bossManager.UseSkill(
                     lightningSkillIndex, 
                     lightningSpawnPosition, 

@@ -1,52 +1,61 @@
 using UnityEngine;
-using DG.Tweening; // DOTween 필요
+using DG.Tweening;
 
 public class BossHit : MonoBehaviour
 {
-    [Header("보스에게 줄 피해량")]
-    public float damage = 10f;
-
     [Header("Damage Effect Settings")]
-    public Color damageColor = Color.red; // 피격 시 색상
-    public float flashDuration = 0.1f;    // 색상 변경 지속 시간
+    public Color damageColor = Color.red;
+    public float flashDuration = 0.1f;
+    public float bong = 0;
+
+    [Header("Hit Cooldown Settings")]
+    public float hitCooldown = 0.3f;   // ← 이 시간 동안 데미지 안 받음
+    private float lastHitTime = -999f;
 
     private BossManager bossManager;
-    private SpriteRenderer spriteRenderer; // 보스의 SpriteRenderer
+    private SpriteRenderer spriteRenderer;
 
     private void Start()
     {
-        // 씬에서 BossManager 찾기
         bossManager = FindObjectOfType<BossManager>();
-        if (bossManager == null)
-            Debug.LogError("씬에 BossManager 오브젝트가 존재하지 않습니다!");
-
-        // SpriteRenderer 가져오기
         spriteRenderer = GetComponent<SpriteRenderer>();
-        if (spriteRenderer == null)
-            Debug.LogError("BossHit 오브젝트에 SpriteRenderer가 없습니다!");
     }
 
-    // 2D 일반 충돌 감지 (isTrigger 꺼져 있을 때)
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Weapon") && bossManager != null)
-        {
-            // HP 감소
-            bossManager.TakeDamage(damage);
+        TryApplyDamage(collision.gameObject);
+    }
 
-            // 피격 시 색상 변경
-            FlashDamageEffect();
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        TryApplyDamage(other.gameObject);
+    }
+
+    private void TryApplyDamage(GameObject obj)
+    {
+        if (Time.time - lastHitTime < hitCooldown) return; // ← 딜레이 적용
+
+        float damageToApply = 0f;
+        bool gotDamage = false;
+
+        HitboxDamage hitbox = obj.GetComponent<HitboxDamage>();
+        if (hitbox != null && hitbox.isActive)
+        {
+            damageToApply = hitbox.damage;
+            gotDamage = true;
         }
-    }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("Weapon")  && bossManager != null)
+        ProjectileDamage projectile = obj.GetComponent<ProjectileDamage>();
+        if (projectile != null && projectile.isActive)
         {
-            // HP 감소
-            bossManager.TakeDamage(damage);
+            damageToApply = projectile.damage;
+            gotDamage = true;
+        }
 
-            // 피격 시 색상 변경
+        if (gotDamage)
+        {
+            lastHitTime = Time.time;  // ← 마지막 히트 시간 갱신
+            bossManager.TakeDamage(damageToApply * (100 / (100 + bong)));
             FlashDamageEffect();
         }
     }
@@ -55,8 +64,8 @@ public class BossHit : MonoBehaviour
     {
         if (spriteRenderer == null) return;
 
-        spriteRenderer.DOKill(true);      // 기존 DOTween 효과 종료
-        spriteRenderer.color = damageColor; // 빨간색으로 즉시 변경
-        spriteRenderer.DOColor(Color.white, flashDuration); // 원래 색으로 복귀
+        spriteRenderer.DOKill(true);
+        spriteRenderer.color = damageColor;
+        spriteRenderer.DOColor(Color.white, flashDuration);
     }
 }

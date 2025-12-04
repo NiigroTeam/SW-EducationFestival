@@ -13,6 +13,8 @@ public class Tornado : MonoBehaviour
     [Range(0f, 1f)]
     [Tooltip("흡입 적용의 부드러움/반응성 (0에 가까울수록 반응 빠름)")]
     public float damping = 0.1f;
+    public AudioSource audioSource;
+    public AudioClip audioClip;
 
     // --- 추적 설정 ---
     [Header("추적 설정")]
@@ -48,6 +50,10 @@ public class Tornado : MonoBehaviour
     private Coroutine damageCoroutine;
     private Coroutine lifeTimeCoroutine; // 🟢 생명 주기 코루틴 참조
 
+    void Start()
+    {
+        audioSource.PlayOneShot(audioClip);
+    }
     void Awake()
     {
         var playerObj = GameObject.FindGameObjectWithTag("Player");

@@ -1,1 +1,1 @@
-Temp/ScriptUpdater/325267976/771487605_Player.cs => Assets/Script/Player.cs
+Temp/ScriptUpdater/325267976/1451730811_SceneFader.cs => Assets/kimsechan/Script/SceneFader.cs

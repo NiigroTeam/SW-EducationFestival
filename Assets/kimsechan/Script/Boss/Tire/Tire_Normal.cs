@@ -5,6 +5,8 @@ using DG.Tweening;
 
 public class Tire_Normal : Skill_based
 {
+    public AudioSource audioSource;
+    public AudioClip audioClip;
     [Header("예고 설정")]
     public float warningTime = 1f; // 빨간색 예고 시간
 
@@ -90,6 +92,8 @@ public class Tire_Normal : Skill_based
          
                  // 2. 예고 시간 대기
                  yield return new WaitForSeconds(warningTime);
+                 
+                 audioSource.PlayOneShot(audioClip);
          
                  // 3. 색상 원래대로 복구
                  for (int i = 0; i < childRenderers.Count; i++)
